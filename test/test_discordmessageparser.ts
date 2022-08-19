@@ -72,10 +72,10 @@ function getMessage(str: string, bot: boolean = false, mentionEveryone: boolean 
         mentions: {
             everyone: mentionEveryone,
         },
-        reference:{messageID: ""},
+        reference: null,
         author,
         guild,
-        webhookID: ""
+        webhookID: null
     };
     return msg;
 }

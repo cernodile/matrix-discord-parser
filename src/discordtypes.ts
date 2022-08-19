@@ -84,5 +84,5 @@ export interface IDiscordMessage {
     guild?: IDiscordGuild | null;
     content: string;
     embeds: IDiscordMessageEmbed[];
-    webhookID: string;
+    webhookID: string | null;
 }

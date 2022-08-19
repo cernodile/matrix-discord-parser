@@ -46,7 +46,7 @@ export interface IDiscordMessageParserCallbacks {
     getUser: (id: string) => Promise<IDiscordMessageParserEntity | null>;
     getChannel: (id: string) => Promise<IDiscordMessageParserEntity | null>;
     getEmoji: (name: string, animated: boolean, id: string) => Promise<string | null>;
-    getReference: (id: string) => Promise<IDiscordMessage | null>;
+    getReference?: (id: string) => Promise<IDiscordMessage | null>;
 }
 
 export interface IDiscordMessageParserOpts {
@@ -405,7 +405,8 @@ export class DiscordMessageParser {
         content: string,
         msg: IDiscordMessage,
     ): Promise<string> {
-        if (!msg.reference) {
+        if (!opts.callbacks.getReference || !msg.reference?.messageID)
+        {
             return content;
         }
         const reply = await opts.callbacks.getReference(msg.reference.messageID);
@@ -422,7 +423,8 @@ export class DiscordMessageParser {
         content: string,
         msg: IDiscordMessage,
     ): Promise<string> {
-        if (!msg.reference) {
+        if (!opts.callbacks.getReference || !msg.reference?.messageID)
+        {
             return content;
         }
         const reply = await opts.callbacks.getReference(msg.reference.messageID);
