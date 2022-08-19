@@ -59,7 +59,7 @@ export interface IDiscordMessage {
         username: string;
     };
     reference: {
-        messageID: string;
+        messageID: string | null;
     } | null;
     guild?: IDiscordGuild | null;
     content: string;
