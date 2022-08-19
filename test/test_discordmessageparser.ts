@@ -61,7 +61,9 @@ function getMessage(str: string, bot: boolean = false, mentionEveryone: boolean 
     };
     (guild.roles as any).set("123456", role);
     const author = {
-        bot,
+        bot: bot,
+        id: "",
+        username: ""
     };
     const msg: IDiscordMessage = {
         id: "123456789",
@@ -70,8 +72,10 @@ function getMessage(str: string, bot: boolean = false, mentionEveryone: boolean 
         mentions: {
             everyone: mentionEveryone,
         },
+        reference:{messageID: ""},
         author,
         guild,
+        webhookID: ""
     };
     return msg;
 }
