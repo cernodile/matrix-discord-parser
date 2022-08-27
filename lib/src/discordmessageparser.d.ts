@@ -11,6 +11,7 @@ export interface IDiscordMessageParserCallbacks {
 }
 export interface IDiscordMessageParserOpts {
     callbacks: IDiscordMessageParserCallbacks;
+    noEmbed?: boolean;
 }
 export interface IDiscordMessageParserResult {
     formattedBody: string;

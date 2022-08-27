@@ -51,6 +51,7 @@ export interface IDiscordMessageParserCallbacks {
 
 export interface IDiscordMessageParserOpts {
     callbacks: IDiscordMessageParserCallbacks;
+    noEmbed?: boolean;
 }
 
 export interface IDiscordMessageParserResult {
@@ -105,14 +106,14 @@ export class DiscordMessageParser {
             noHighlightCode: true,
         });
         if (!replying) content = await this.InsertReply(opts, content, msg);
-        content = this.InsertEmbeds(opts, content, msg);
+        if (opts.noEmbed == false) content = this.InsertEmbeds(opts, content, msg);
         content = await this.InsertMxcImages(opts, content, msg);
         content = await this.InsertUserPills(opts, content, msg);
         content = await this.InsertChannelPills(opts, content, msg);
 
         // parse postmark stuff
         if (!replying) contentPostmark = await this.InsertReplyPostmark(opts, contentPostmark, msg);
-        contentPostmark = this.InsertEmbedsPostmark(opts, contentPostmark, msg);
+        if (opts.noEmbed == false) contentPostmark = this.InsertEmbedsPostmark(opts, contentPostmark, msg);
         contentPostmark = await this.InsertMxcImages(opts, contentPostmark, msg, true);
         contentPostmark = await this.InsertUserPills(opts, contentPostmark, msg, true);
         contentPostmark = await this.InsertChannelPills(opts, contentPostmark, msg, true);
