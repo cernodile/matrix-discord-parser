@@ -176,6 +176,10 @@ export class DiscordMessageParser {
                     noExtraSpanTags: true,
                     noHighlightCode: true,
                 });
+                if (embedContent.includes("**[Jump to message]("))
+                {
+                    embedContent = embedContent.substring(0, embedContent.lastIndexOf("**[Jump to message]("));
+                }
             }
             if (embed.fields) {
                 for (const field of embed.fields) {
@@ -235,6 +239,10 @@ export class DiscordMessageParser {
                     noExtraSpanTags: true,
                     noHighlightCode: true,
                 }) + "</p>";
+                if (embedContent.includes("**[Jump to message]("))
+                {
+                    embedContent = embedContent.substring(0, embedContent.lastIndexOf("**[Jump to message]("));
+                }
             }
             if (embed.fields) {
                 for (const field of embed.fields) {
